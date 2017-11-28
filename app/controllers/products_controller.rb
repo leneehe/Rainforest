@@ -1,10 +1,12 @@
 class ProductsController < ApplicationController
   def index
     @products = Product.all
+    # @product_in_dollars = @product.price_in_dollars
   end
 
   def show
     @product = Product.find(params[:id])
+    @product_in_dollars = @product.price_in_dollars
   end
 
   def new
