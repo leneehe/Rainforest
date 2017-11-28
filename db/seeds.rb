@@ -11,3 +11,9 @@ Product.create!(name: "Dog toy", description: "A fun chewy toy for your puppy", 
 Product.create!(name: "Cat toy", description: "A fun chewy toy for your kitten", price: 750)
 Product.create!(name: "Headphones", description: "Listen to your music with these cool headphones", price: 20000)
 Product.create!(name: "Soccer ball", description: "Have hours of fun with this soccer ball!", price: 2000)
+
+Review.destroy_all
+Review.create!(comment:"This is a product review", product_id: 1)
+Review.create!(comment:"This is also a product review", product_id: 1)
+Review.create!(comment:"Best product ever!", product_id: 2)
+Review.create!(comment:"It isn't worth it.", product_id: 2)
