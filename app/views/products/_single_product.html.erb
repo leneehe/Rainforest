@@ -1,1 +1,9 @@
-<%=  %>
+<div class="product">
+  <h3><%= link_to product.name, product_path(product) %></h3>
+  <p>
+    <strong>Description:</strong> <%= product.description %>
+  </p>
+  <p>
+    Price: <%= product.price %>
+  </p>
+</div>

@@ -2,8 +2,7 @@
 
 <%= link_to("New Product", new_product_path)  %>
 
-<%= @products.each do |product| %>
-  <%= link_to product.name, product_path(product) %>
-  <%= product.description %>
-  <%= product.price %>
+<h2>Products</h2>
+<% @products.each do |current_product| %>
+  <%= render 'single_product', product: current_product %>
 <% end %>
