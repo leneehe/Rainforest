@@ -18,6 +18,7 @@ class ProductsController < ApplicationController
     @product.price = params[:product][:price]
 
     if @product.save
+      flash[:notice] = "You have successfully saved the product."
       redirect_to product_path(@product)
     else
       render :new
@@ -35,6 +36,7 @@ class ProductsController < ApplicationController
     @product.price = params[:product][:price]
 
     if @product.save
+      flash[:notice] = "You have successfully edited the product."
       redirect_to product_path(@product)
     else
       render :edit
@@ -45,6 +47,7 @@ class ProductsController < ApplicationController
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
+    flash[:notice] = "You have successfully deleted the product."
     redirect_to products_path
   end
 
