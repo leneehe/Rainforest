@@ -8,11 +8,20 @@ class ProductsController < ApplicationController
   end
 
   def new
-
+    @product = Product.new
   end
 
   def create
+    @product = Product.new
+    @product.name = params[:product][:name]
+    @product.description = params[:product][:description]
+    @product.price = params[:product][:price]
 
+    if @product.save
+      redirect_to product_path(@product)
+    else
+      redirect_to new_product_path
+    end
   end
 
   def edit
