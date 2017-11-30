@@ -15,16 +15,33 @@
     <% if flash[:alert] %>
       <p class="alert"><%= flash[:alert] %></p>
     <% end %>
-    
+
     <h1>Rainforest</h1>
     <nav>
       <ul>
+        <% if current_user %>
+        <p>
+          Hello <%= current_user.email %>. Welcome to Rainforest!
+        </p>
         <li>
           <%= link_to("Home", products_path)  %>
         </li>
         <li>
           <%=  link_to("New Product", new_product_path)   %>
         </li>
+        <li>
+          <%= link_to "Logout", sessions_path, method: :delete %>
+        </li>
+        <% else %>
+        <li>
+          <%=  link_to("New User", new_users_path)   %>
+        </li>
+        <li>
+          <%= link_to "Login", new_sessions_path %>
+        </li>
+        <% end %>
+
+
       </ul>
     </nav>
     <%= yield %>
