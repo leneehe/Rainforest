@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!, except: %i(index show)
   def index
     @products = Product.all
     # @product_in_dollars = @product.price_in_dollars
@@ -18,11 +19,13 @@ class ProductsController < ApplicationController
     @product.name = params[:product][:name]
     @product.description = params[:product][:description]
     @product.price = params[:product][:price]
+    @product.user = current_user
 
     if @product.save
       flash[:notice] = "You have successfully saved the product."
       redirect_to product_path(@product)
     else
+      flash.now[:alert] = @product.errors.full_messages
       render :new
     end
   end
@@ -36,11 +39,13 @@ class ProductsController < ApplicationController
     @product.name = params[:product][:name]
     @product.description = params[:product][:description]
     @product.price = params[:product][:price]
+    @product.user = current_user
 
     if @product.save
       flash[:notice] = "You have successfully edited the product."
       redirect_to product_path(@product)
     else
+      flash.now[:alert] = @product.errors.full_messages
       render :edit
     end
 
