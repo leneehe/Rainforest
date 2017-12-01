@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create]
+  before_action :ensure_ownership, except: [:create]
   def create
     @product = Product.find(params[:product_id])
     product = Product.find(params[:product_id])
@@ -18,13 +19,11 @@ class ReviewsController < ApplicationController
 
   def edit
     @product = Product.find(params[:product_id])
-    @review = Review.find(params[:id])
   end
 
   def update
     @product = Product.find(params[:product_id])
     product = Product.find(params[:product_id])
-    @review = Review.find(params[:id])
     @review.comment = params[:review][:comment]
     @review.product_id = params[:product_id]
 
@@ -32,13 +31,13 @@ class ReviewsController < ApplicationController
       flash[:notice] = "You have successfully edited the review."
       redirect_to product_url(product)
     else
+      flash.now[:alert] = @review.errors.full_messages
       render '/reviews/edit'
     end
   end
 
   def destroy
     @product = Product.find(params[:product_id])
-    @review = Review.find(params[:id])
     @review.destroy
     flash[:notice] = "You have successfully deleted the review."
     redirect_to product_url(@product)
