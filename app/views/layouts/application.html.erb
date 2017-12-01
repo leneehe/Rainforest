@@ -12,13 +12,6 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <% if flash[:notice] %>
-      <p class="notice"><%= flash[:notice] %></p>
-    <% end %>
-    <% if flash[:alert] %>
-      <p class="alert"><%= flash[:alert] %></p>
-    <% end %>
-
     <h1>Rainforest</h1>
     <nav>
       <ul>
@@ -33,14 +26,14 @@
           <%=  link_to("New Product", new_product_path)   %>
         </li>
         <li>
-          <%= link_to "Logout", sessions_path, method: :delete %>
+          <%= link_to "Logout",  destroy_user_session_path, method: :delete %>
         </li>
         <% else %>
         <li>
-          <%=  link_to("New User", new_users_path)   %>
+          <%=  link_to("New User", new_user_registration_path)   %>
         </li>
         <li>
-          <%= link_to "Login", new_sessions_path %>
+          <%= link_to "Login", new_user_session_path %>
         </li>
         <% end %>
 
