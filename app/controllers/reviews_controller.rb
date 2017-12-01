@@ -23,13 +23,12 @@ class ReviewsController < ApplicationController
 
   def update
     @product = Product.find(params[:product_id])
-    product = Product.find(params[:product_id])
     @review.comment = params[:review][:comment]
     @review.product_id = params[:product_id]
 
     if @review.save
       flash[:notice] = "You have successfully edited the review."
-      redirect_to product_url(product)
+      redirect_to product_url(params[:product_id])
     else
       flash.now[:alert] = @review.errors.full_messages
       render '/reviews/edit'

@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   def ensure_ownership
     @review = Review.find(params[:id])
-    if @review.id != current_user.id
+    if @review.user != current_user
       flash[:alert] = ["You are not the owner of this review!"]
       redirect_to root_path
     end
