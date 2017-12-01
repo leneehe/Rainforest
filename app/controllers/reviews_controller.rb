@@ -4,7 +4,7 @@ class ReviewsController < ApplicationController
     @product = Product.find(params[:product_id])
     product = Product.find(params[:product_id])
 
-    @review = Review.new
+    @review = current_user.reviews.new
     @review.comment = params[:review][:comment]
     @review.product_id = params[:product_id]
 
